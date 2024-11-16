@@ -7,7 +7,7 @@ using namespace std;
 class test_list {
 public:
     string data;        // Данные узла
-    Node* next;        // Указатель на следующий узел
+    test_list* next;        // Указатель на следующий узел
 
     // Конструктор
     test_list(const string& data) : data(data), next(nullptr) {}
@@ -33,7 +33,7 @@ public:
 
     // Метод добавления элемента в конец списка
     void append(const string& data) {
-        test_list* newNode = new Node(data); // Новый узел
+        test_list* newNode = new test_list(data); // Новый узел
         if (head == nullptr) {
             head = newNode;      // Если список пуст, новый узел становится головой
             return;
@@ -58,17 +58,17 @@ public:
     // Метод сортировки списка
     void sort() {
         if (head == nullptr || head->next == nullptr) {
-            return; 
+            return;
         }
-        bool swapped;  
+        bool swapped;
         do {
-            swapped = false; 
+            swapped = false;
             test_list* current = head; // Начало с головы списка
             while (current->next != nullptr) {
-               
+
                 if (current->data > current->next->data) { // Сравнение текущего узла с следующим
                     swap(current->data, current->next->data);  // Обмен значениями
-                    swapped = true; 
+                    swapped = true;
                 }
                 current = current->next; // Переход к следующему узлу
             }
@@ -81,13 +81,13 @@ int main() {
     while (true) {
         string data;
         cout << "Введите элемент списка или exit для завершения ввода: ";
-        getline(cin, data); 
+        getline(cin, data);
         if (data == "exit") {
             break;
         }
         linkedList.append(data); // Добавить элемент в список
     }
-    
+
     cout << "Список до сортировки:" << endl;
     linkedList.printList(); // Вывод несортированного список
     linkedList.sort(); // Сортировка список
